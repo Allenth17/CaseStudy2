@@ -46,9 +46,9 @@ fun UserCard(
         modifier = modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
         colors = CardDefaults.cardColors(
             containerColor = when {
-                user.age <= 30 -> Color(0xFF4CAF50) // green
-                user.age in 31..40 -> Color(0xFFFFEB3B) // yellow
-                else -> Color(0xFFF44336) // red
+                user.age <= 30 -> Color(0xFF4CAF50)
+                user.age in 31..40 -> Color(0xFFFFEB3B)
+                else -> Color(0xFFF44336)
             }
         ),
         onClick = onClick

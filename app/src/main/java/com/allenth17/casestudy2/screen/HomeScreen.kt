@@ -92,7 +92,6 @@ fun HomeScreen(
                         }
                     )
                     val sorted = if (ascending) filtered.sortedBy { it.firstName } else filtered.sortedByDescending { it.firstName }
-                    // Pass inner padding as zero since we already applied paddingValues to Column and will add spacing within grid
                     UserList(users = sorted, paddingValues = PaddingValues(0.dp)) { user ->
                         onUserClick(user)
                     }

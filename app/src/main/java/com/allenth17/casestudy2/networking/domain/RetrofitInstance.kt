@@ -13,7 +13,6 @@ object RetrofitInstance {
     }
     val apiInterface: ApiInterface = getInstance().create(ApiInterface::class.java)
 
-    // Helper to build an absolute icon URL for Coil or other clients.
     fun buildIconUrl(username: String, size: Int = 128): String =
         BASE_URL + "icon/" + username + "/" + size
 }
