@@ -1,5 +1,6 @@
 package com.allenth17.casestudy2.screen.ui
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -33,6 +34,7 @@ import coil3.request.ImageRequest
 import com.allenth17.casestudy2.networking.Company
 import com.allenth17.casestudy2.networking.User
 import okhttp3.OkHttpClient
+import com.allenth17.casestudy2.networking.iconUsername
 
 @Composable
 fun UserCard(
@@ -40,24 +42,6 @@ fun UserCard(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val sizeResolver = rememberConstraintsSizeResolver()
-    val imageLoader = ImageLoader.Builder(LocalPlatformContext.current)
-        .components {
-            add(
-                OkHttpNetworkFetcherFactory(
-                    callFactory = {
-                        OkHttpClient()
-                    }
-                )
-            )
-        }
-        .build()
-    val painter = rememberAsyncImagePainter(
-        model = ImageRequest.Builder(LocalPlatformContext.current)
-            .data(user.image)
-            .size(sizeResolver)
-            .build(),
-    )
     Card(
         modifier = modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
         colors = CardDefaults.cardColors(
@@ -74,14 +58,19 @@ fun UserCard(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Image(
-                painter = painter,
+            AsyncImage(
+                model = com.allenth17.casestudy2.networking.domain.RetrofitInstance.buildIconUrl(
+                    username = user.iconUsername(),
+                    size = 128
+                ),
                 contentDescription = "Avatar ${user.firstName} ${user.lastName}",
                 modifier = Modifier
                     .size(48.dp)
                     .clip(CircleShape),
                 contentScale = ContentScale.Crop
             )
+            Log.d("UserCard", "Loading image: ${user.image}")
+
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = "${user.firstName} ${user.lastName}",

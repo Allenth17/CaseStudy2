@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import coil3.compose.AsyncImage
+import com.allenth17.casestudy2.networking.iconUsername
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -97,7 +98,10 @@ private fun UserDetailContent(
             colors = CardDefaults.cardColors(),
         ) {
             AsyncImage(
-                model = user.image,
+                model = com.allenth17.casestudy2.networking.domain.RetrofitInstance.buildIconUrl(
+                    username = user.iconUsername(),
+                    size = 128
+                ),
                 contentDescription = "Avatar ${user.firstName} ${user.lastName}",
                 modifier = Modifier
                     .size(96.dp)

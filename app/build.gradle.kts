@@ -43,6 +43,7 @@ android {
 }
 
 dependencies {
+    implementation("io.coil-kt.coil3:coil-svg:3.0.0")
     implementation(libs.coil.network.okhttp)
     implementation(libs.bundles.media)
     implementation(libs.bundles.koin)
